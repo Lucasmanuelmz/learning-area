@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="pt">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping list example</title>
+    <title>Exemplo de Lista de Compras</title>
     <style>
       li {
         margin-bottom: 10px;
@@ -18,12 +18,12 @@
   </head>
   <body>
 
-    <h1>My shopping list</h1>
+    <h1>Minha lista de compras</h1>
 
     <div>
-      <label for="item">Enter a new item:</label>
+      <label for="item">Digite um novo item:</label>
       <input type="text" name="item" id="item">
-      <button>Add item</button>
+      <button>Adicionar item</button>
     </div>
 
     <ul>
@@ -31,7 +31,61 @@
     </ul>
 
     <script>
+      let input = document.querySelector('input');
+      let list = document.querySelector('ul');
+      const button = document.querySelector('button');
 
+      function addDinamicItemToList(item) {
+        // Criando dinamicamente novos elementos DOM
+        let li = document.createElement('li');
+        let span = document.createElement('span');
+        let btn = document.createElement('button');
+
+        // Adicionando elementos à lista
+        li.appendChild(span);
+        li.appendChild(btn);
+        list.appendChild(li);
+
+        //Adicionando estilos para os itens
+        li.style.width='250px';
+        li.style.display = 'flex'
+        li.style.justifyContent= 'space-between';
+        li.style.backgroundColor = 'black';
+        li.style.color = 'white';
+        li.style.padding = '10px';
+        li.style.alignItems = 'center';
+        li.style.listStyle ='none';
+        li.style.marginTop = '1px';
+        btn.style.backgroundColor= 'red';
+        btn.style.color = 'white';
+        btn.style.border = 'none';
+        btn.style.fontSize =' 14px';
+
+        // Configurando o botão delete
+        btn.textContent = 'Delete';
+        btn.addEventListener('click', () => {
+          list.removeChild(li);
+        });
+
+        // Adicionando o texto do item ao span
+        span.textContent = item;
+      }
+
+      function addItem() {
+        let item = input.value;
+        if (item.trim() !== '') {
+          // Adicionando item à lista apenas se não estiver vazio
+        input.value = '';
+        addDinamicItemToList(item);
+        }
+      }
+
+      button.addEventListener('click', addItem);
+
+      input.focus();
     </script>
   </body>
 </html>
+<!--Nota: O código html foi originalmente desenvolvido pela mozilla, eu traduzí os textos para português
+Visto que sou falante de língua portuguêsa. O javascript foi integralmente introduzido por mim seguindo as orientações da mozilla no site oficial
+precisamente neste link https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents#summary-->
